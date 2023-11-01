@@ -5,6 +5,12 @@ git add .
 git commit -m "コメントを入れる"
 コメントを入れないといけない
 
+git remote add origin https://github.com/soyukb/Memos.git
+なぞ
+
+git branch -M main
+なぞ
+
 git push origin
 リモートリポジトリに反映される
 
