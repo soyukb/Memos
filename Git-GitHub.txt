@@ -9,7 +9,7 @@ git remote add origin https://github.com/soyukb/Memos.git
 なぞ
 
 git branch -M main
-なぞ
+最初だけ必要？
 
 git push origin
 リモートリポジトリに反映される
@@ -18,5 +18,7 @@ git clone [リポジトリパス]
 リモートリポジトリからローカルリポジトリにコピー
 リポジトリパスは[Code]を押すと出てくる
 
+git commit -a -m "コメントを入れる"
+addとcommitを一回でできるようになる、最初は使えない
 
 
