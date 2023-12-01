@@ -1,0 +1,19 @@
+Tailwind CSSでは、さまざまな画面サイズ（xs、sm、md、lg、xlなど）に対してクラスが提供されており、それを活用してレスポンシブなデザインを実現することができます。
+
+<div class="md:hidden">
+  この要素は中サイズ以上の画面で非表示です。
+</div>
+
+<div class="hidden md:block">
+  この要素は中サイズ以上の画面で表示され、それ以外の場合は非表示です。
+</div>
+
+h-screen
+要素がビューポートの高さ全体に広がるようにします。
+
+<div class="rounded ..."></div>
+<div class="rounded-md ..."></div>
+<div class="rounded-lg ..."></div>
+<div class="rounded-full ..."></div>
+Rounded-sm、rounded、rounded-lg などのユーティリティを使用して、要素に異なる境界線の半径サイズを適用します。
+

@@ -1,0 +1,199 @@
+(){}を気を付ける
+
+npx create-react-app フォルダ名
+箱を作ることができる
+
+不要なファイル
+App.test.js
+logo.svg
+reportWebVitals.js
+setupTests.js
+
+rafce
+コンポーネントを作成できる
+
+fetchは、JavaScriptでHTTPリクエストを行うためのネイティブなAPIです。
+fetchを使用すると、サーバーからデータを取得したり、データを送信したりできます。
+fetch('https://api.example.com/data')
+  .then(response => response.json()) // レスポンスをJSONに変換
+  .then(data => {
+    console.log(data); // 取得したデータを処理
+  })
+  .catch(error => {
+    console.error('エラー:', error);
+  });
+fetch関数には、リクエストを送信するURLを渡します。
+fetchはPromiseを返します。リクエストが成功すると、PromiseはResponseオブジェクトを返します。
+.then()メソッドを使用して、Responseオブジェクトからデータを取得します。通常、.json()メソッドを使用してJSONデータを抽出します。
+最終的に、データを取得したりエラーハンドリングを行ったりします。
+
+HTTPリクエストメソッド (GET、POST、PUT、DELETEなど) を指定できます:
+fetch('https://api.example.com/data', {
+  method: 'POST',
+  body: JSON.stringify({ key: 'value' }),
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('エラー:', error);
+  });
+
+  クエリパラメータをURLに追加できます:
+  const params = new URLSearchParams({ key1: 'value1', key2: 'value2' });
+const url = `https://api.example.com/data?${params}`;
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('エラー:', error);
+  });
+
+asyncは非同期関数を宣言し、awaitは非同期処理が完了するまで処理を一時停止するのに使用されます。
+async function fetchData() {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('エラー:', error);
+  }
+}
+
+非同期関数
+.then()メソッドと.catch()メソッドを使用して結果を処理できます。
+function fetchData() {
+  return fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('エラー:', error);
+    });
+}
+
+// 非同期関数を呼び出す
+fetchData();
+
+非同期関数は通常、awaitを使用して呼び出されます。
+async function main() {
+  const data = await fetchData();
+  console.log(data);
+}
+
+Promise.allは、複数のPromiseオブジェクトを含む配列を受け取り、それらのPromiseがすべて成功した場合に成功し、
+どれか1つでも失敗した場合に失敗します。成功時には、各Promiseの結果が配列として返されます。
+const promise1 = fetchDataFromServer1();
+const promise2 = fetchDataFromServer2();
+const promise3 = fetchDataFromServer3();
+
+Promise.all([promise1, promise2, promise3])
+  .then(results => {
+    // resultsは各Promiseの結果を含む配列
+    console.log('全てのPromiseが成功しました:', results);
+  })
+  .catch(error => {
+    // どれか1つでもPromiseが失敗した場合のエラーハンドリング
+    console.error('少なくとも1つのPromiseが失敗しました:', error);
+  });
+全てのPromiseが成功しない場合: もし、配列内のどれか1つのPromiseが失敗した場合、Promise.allはその失敗を返します。成功したPromiseの結果は無視されます。
+順序を保持: Promise.allは、Promiseが配列内で指定された順序で解決されることを保証します。したがって、results配列内の順序も保持されます。
+非同期操作の同時実行: Promise.allは、非同期操作を同時に実行することでパフォーマンスを向上させるのに役立ちます。それぞれのPromiseは並行して実行され、待機時間が最短になります。
+エラーハンドリング: Promise.allは、配列内のどれか1つのPromiseが失敗した場合にエラーハンドリングを行います。そのため、エラーを適切に処理することが重要です。
+Promise.allは、複数の非同期操作を同時に実行して、全ての操作が完了したときに結果を処理する場合に非常に便利です。
+
+react-router-domはReactアプリケーション内でのルーティングを管理するためのライブラリで、
+Reactアプリケーションを異なるページまたはビューにナビゲートするために使用されます。
+
+ルートコンポーネントでBrowserRouterコンポーネントを使用し、アプリケーション全体にルーティング機能を導入します。
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
+  );
+}
+
+Linkコンポーネントは、Reactアプリケーション内で異なるルート間をナビゲートするために使用されます。
+import { Link } from 'react-router-dom';
+
+function Navigation() {
+  return (
+    <div>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/contact">Contact</Link>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+<input
+  type="text"
+  value={inputValue}
+  onChange={(e) => setInputValue(e.target.value)}
+/>
+e: これはイベントオブジェクト
+e.target はイベントが発生した要素、通常はDOM要素
+value: e.target.value は、特にフォーム要素の場合、その要素の現在の値を表します。
+
+import { useNavigate } from 'react-router-dom';
+function MyComponent() {
+  const navigate = useNavigate();
+  
+  // ボタンクリック時に別のURLに遷移
+  const handleButtonClick = () => {
+    navigate('/new-route');
+  }
+
+  return (
+    <div>
+      <button onClick={handleButtonClick}>Navigate</button>
+    </div>
+  );
+}
+useNavigateフックを呼び出すことで、navigateという関数が得られます。
+この関数は、指定されたURLに遷移したり、新しいルートに移動したりするために使用されます。
+
+import "./Home.css"
+cssの読み込み方
+
+window.location.href="/"
+JavaScriptを使用してウェブページのリダイレクトやURLの変更を行う際に利用されるプロパティ
+
+オプショナルチェイン（Optional Chaining）は、JavaScriptの新しい言語機能の一つで、プロパティやメソッドへのアクセスを安全に行うための演算子です。
+プロパティやメソッドが存在しない場合でもエラーをスローせず、代わりに undefined を返します。
+const person = {
+  name: "John",
+  address: {
+    city: "New York"
+  }
+};
+
+// オプショナルチェイン演算子を使用して、存在しないプロパティにアクセスする
+const cityName = person?.address?.city; // "New York"
+
+const nonExistentProperty = person?.nonExistent?.property; // undefined
+
+
+
