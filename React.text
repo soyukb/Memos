@@ -195,5 +195,21 @@ const cityName = person?.address?.city; // "New York"
 
 const nonExistentProperty = person?.nonExistent?.property; // undefined
 
+htmlの属性
+キャメルケースでかく
+数字は{}囲む
+trueは書かなくてもいい
+falaseは{}で囲む
+classはclassName
+インラインスタイルはオブジェクトで渡す
+
+
+
+
+
+
+
+
+
 
 

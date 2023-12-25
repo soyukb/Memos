@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>花弁が舞うエフェクト</title>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0;
+      }
+
+      .petal {
+        position: absolute;
+        background-color: #ffcc00; /* 花弁の色 */
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: fall linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function createPetal() {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        document.body.appendChild(petal);
+
+        const startPosition = Math.random() * window.innerWidth;
+        const animationDuration = Math.random() * 5 + 5; // 5から10秒のランダムなアニメーション時間
+
+        petal.style.left = `${startPosition}px`;
+        petal.style.animationDuration = `${animationDuration}s`;
+
+        // アニメーション終了時に要素を削除
+        petal.addEventListener("animationend", () => {
+          document.body.removeChild(petal);
+        });
+      }
+
+      // 一定間隔で花弁を生成
+      setInterval(createPetal, 100);
+    </script>
+  </body>
+</html>

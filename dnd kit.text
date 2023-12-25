@@ -1,0 +1,38 @@
+import React from 'react';
+import {DndContext} from '@dnd-kit/core';
+
+function App() {
+  return (
+    <DndContext>
+      {/* Components that use `useDraggable`, `useDroppable` */}
+    </DndContext>
+  );
+}
+必ずDndContexで囲む
+
+function App() {
+  return (
+    <DndContext>
+      {/* Components that use `useDraggable`, `useDroppable` */}
+      <DndContext>
+        {/* ... */}
+        <DndContext>
+          {/* ... */}
+        </DndContext>
+      </DndContext>
+    </DndContext>
+  );
+}
+DndContext プロバイダーをネストする場合、useDroppable フックと useDraggable フックは、そのコンテキスト内の他のドラッグ可能ノードおよびドロップ可能ノードにのみアクセスできることに注意してください。
+複数の DndContext プロバイダーが同じイベントをリッスンしている場合、DOM 内でイベントがバブルする方法と同様に、イベントは、そのイベントによってアクティブ化されるセンサーを含む最初の DndContext によってキャプチャされます。
+
+
+
+
+
+
+
+
+
+
+

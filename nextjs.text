@@ -1,0 +1,75 @@
+npx create-next-app@latest
+purojext作成
+
+app router 
+Next.jsのアプリケーションでのルーティングは、主にpagesディレクトリ内に配置されたReactコンポーネントに基づいて構築されます。これにより、ファイルシステムがルーティングの構造を反映し、簡単に理解できるコード構造を作成できます。また、Next.jsはクライアントサイドとサーバーサイドのルーティングを自動的に処理し、必要に応じてページを事前に生成することができます。
+以下は、Next.jsのAppRouterの基本的な使い方や概念についての詳細な説明です：
+ファイルシステムベースのルーティング:
+pagesディレクトリ内に配置されたReactコンポーネントは、自動的に対応するURLパスにマップされます。
+例えば、pages/index.jsはデフォルトで/、pages/about.jsは/aboutになります。
+ダイナミックルーティング:
+ファイル名に[]を使用することで、動的なルートパラメータを指定できます。例えば、pages/post/[id].jsは/post/1や/post/2などに対応します。
+Linkコンポーネント:
+next/linkモジュールを使用したLinkコンポーネントを使って、クライアントサイドのナビゲーションを簡単に実現できます。
+
+Next.js Imageは、next/image モジュールを使用して利用します。
+import Image from 'next/image'
+
+function MyImage() {
+  return (
+    <Image
+      src="/path/to/image.jpg"
+      alt="Description of the image"
+      width={500}
+      height={300}
+    />
+  )
+}
+src: 画像のパスを指定します。
+alt: 画像の代替テキストを指定します。
+widthおよびheight: 画像の表示サイズを指定します。これらのプロパティは必須です。
+layout: 画像のレイアウトを指定します。responsive、fixed、intrinsicのいずれかを選択できます。
+objectFitおよびobjectPosition: 画像のオブジェクトフィットとオブジェクトポジションを指定します。
+loading: 画像の読み込み方法を指定します。eager、lazy、autoのいずれかを選択できます。
+
+next.config.js ファイルを使用して、バックエンドの設定を変更できます。例えば、外部の画像配信サービスを使用する場合などに利用します。
+
+redirect(`/`);
+import { redirect } from "next/navigation";
+
+client
+serverをimportできない
+
+server
+async awaitをじかにかける
+フックスとイベントハンドラを使えない
+
+@
+srcフォルダからはじまる
+
+ユーザーが存在しないページにアクセスした場合、Next.jsは自動的に404ページを表示します。notfound() 関数を使うことで、この404ページを独自にカスタマイズできます。
+
+page.tsx
+
+layout.tsx
+
+not-found.tsx
+
+loading.tsx
+
+error.tsx
+
+route.tsx
+
+
+
+
+
+
+
+
+
+
+
+
+

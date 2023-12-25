@@ -1,0 +1,159 @@
+python -m django --version
+djangoがインストールされているかどうか
+
+python -m venv venv
+Python仮想環境（venv）を作成するためのコマンドです。
+
+.\venv\Scripts\activate
+仮想環境を有効にするには、プロジェクトのディレクトリにある venv フォルダ内の Scripts ディレクトリ（Windows）または bin ディレクトリ（Linux/macOS）にある activate スクリプトを実行します。
+
+deactivate
+仮想環境を終了するときは、以下のコマンドを実行します。
+
+pip list
+pip install --upgrade pip
+pip install --upgrade pip コマンドは、Pythonのパッケージ管理ツールであるpipをアップグレードするためのコマンドです。具体的には、pip自体を最新のバージョンに更新します。
+pip install django
+pip install djangorestframework
+
+django-admin startproject プロジェクト名 .
+django-admin は Django において管理者権限の処理を行うためのコマンドラインユーティリティです。本項ではその機能が行える事全般をまとめます。
+プロジェクトの構造:
+"startproject"コマンドによって生成されたプロジェクトディレクトリの構造は、以下のようになります：
+mysite/
+├── manage.py
+└── mysite/
+    ├── __init__.py
+    ├── asgi.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+manage.py: Djangoプロジェクトの管理スクリプトで、開発サーバーの起動やデータベースのマイグレーションなどを行います。
+mysite/: DjangoプロジェクトのPythonパッケージです。
+__init__.py: パッケージをPythonのモジュールとして認識させるための空のファイル。
+asgi.py: Asynchronous Server Gateway Interfaceの設定ファイル。
+settings.py: プロジェクトの設定が含まれるファイル。
+urls.py: プロジェクトのURLルーティングを定義するファイル。
+wsgi.py: Web Server Gateway Interfaceの設定ファイル。
+
+
+python manage.py startapp アプリ名
+
+Djangoでは、urls.pyというファイルにURLパターンを書き、views.pyというファイルにビューと呼ばれる関数を書きます。ビューは、リクエストに対してレスポンスを返す処理です。URLパターンは、pathという関数で作成します。
+
+Djangoのpath関数は、URLパターンとビュー関数を結びつけるために使用されます。urls.pyファイルでurlpatternsリスト内にpath関数を使用して、URLパターンとそれに関連するビューを指定します。
+基本的な構文は次のとおりです：
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('example/', views.example_view, name='example-url'),
+]
+
+'example/': URLパターンとして指定された文字列です。この例では、example/にマッチするリクエストがこのビューに送信されます。
+views.example_view: このURLパターンにマッチした場合に呼び出されるビュー関数です。viewsモジュール内のexample_view関数が呼び出されます。
+name='example-url': このURLパターンに名前をつけます。これにより、reverse関数やurlテンプレートタグなどで、名前を使ってURLを逆引きできます。
+パスパターンは変数を使用して動的に作成することもできます。例えば、<int:article_id>を使用すると、数値型のarticle_idがビュー関数に渡されます。
+
+include関数は、Djangoのurls.pyファイルで使用され、他のURLパターンやビューを取り込むためのものです。これにより、プロジェクトのURL設定をモジュール化し、コードの再利用性を向上させることができます。
+
+from django.urls import include, path
+
+urlpatterns = [
+    # 他のアプリケーションのURLパターンを含む
+    path('other/', include('other_app.urls')),
+    # 別のビューモジュールを含む
+    path('another/', include('another_app.views')),
+]
+
+Djangoにおける<>（アングルブラケット）は、URLパターンで使用されるパスパターンの一部です。これは特定の型のデータを受け取るためのもので、主にビュー関数にデータを渡すために利用されます。
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('articles/<int:article_id>/', views.article_detail, name='article-detail'),
+]
+ビュー関数内でこの値を取得するには、関数の引数としてarticle_idを指定します。
+
+DjangoのHttpResponseは、Webアプリケーションのビューからクライアントに対して送信されるHTTPレスポンスを表すためのクラスです。HttpResponseを使用すると、テキストやHTML、JSONなどのコンテンツを含むHTTPレスポンスを生成できます。
+
+URL パラメータの利用
+def greeting(request, name):
+    return HttpResponse(f"Hello, {name}!")
+
+from django.urls import path
+from .views import greeting
+
+この場合、urls.pyで次のように設定します。
+urlpatterns = [
+    path('greet/<str:name>/', greeting, name='greeting'),
+]
+
+Djangoのreverse関数は、ビュー名やURLパターンの名前をもとに、URLのパスを逆引きするための便利なユーティリティです。
+
+from django.urls import reverse
+
+# パラメータを持つビューの逆引き
+url = reverse('my_named_url', args=[1])  # 1はユーザーID
+print(url)
+
+from django.db import models
+
+class MyModel(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    email = models.EmailField()
+
+この例では、MyModel クラスが models.Model クラスを継承し、3つのフィールド（name、age、email）を定義しています。これにより、Djangoはデータベースに対して MyModel テーブルを作成します
+
+CharField: 文字列フィールド。
+IntegerField: 整数フィールド。
+FloatField: 浮動小数点数フィールド。
+DateField: 日付フィールド。
+TimeField: 時刻フィールド。
+DateTimeField: 日付と時刻のフィールド。
+BooleanField: ブール型フィールド。
+EmailField: メールアドレスフィールド。
+他にもいくつかのフィールドが存在します。
+
+モデルの変更や新しいモデルの追加など、データベースのスキーマを変更するたびに、マイグレーションを行う必要があります。
+マイグレーションはデータベースの構造を最新のモデルに同期させるための手順です。
+# マイグレーションの作成
+python manage.py makemigrations
+
+# マイグレーションの実行
+python manage.py migrate
+
+python manage.py makemigrations は、Djangoアプリケーション内のモデルの変更を検出し、それをデータベースマイグレーション用のファイルに変換するためのコマンドです。データベースマイグレーションは、データベースのスキーマを変更する手順を提供します。
+python manage.py migrate コマンドは、Djangoアプリケーション内のマイグレーションファイルをデータベースに適用して、データベースのスキーマを更新するためのコマンドです。このコマンドを実行することで、モデルの変更や新しいモデルの追加などのスキーマの変更がデータベースに反映されます。
+
+__str__ メソッドは、クラスのオブジェクトを文字列に変換するために呼び出される特殊メソッドです。通常、このメソッドはクラスのインスタンスを表す文字列を返します。
+
+.as_view() は、Djangoフレームワークにおいて、クラスベースビュー（Class-Based Views）を関数ベースビュー（Function-Based Views）として扱えるようにするためのメソッドです。これは、通常、urls.pyファイルでルーティングの設定時に使用されます。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
